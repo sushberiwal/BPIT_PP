@@ -1,5 +1,6 @@
 let challenges = require("./challenges.js");
 let puppeteer = require("puppeteer");
+
 let id = "nijer71652@whyflkj.com";
 let pw = "12345678";
 
@@ -36,7 +37,9 @@ let pw = "12345678";
     tab.waitForNavigation({ waitUntil: "networkidle2" }),
     manageChallengeLi.click(),
   ]);
+  
   await tab.waitForSelector(".btn.btn-green.backbone.pull-right" , {visible:true});
+  
   let createChallengeButton = await tab.$(".btn.btn-green.backbone.pull-right");
   let createChallengeLink = await tab.evaluate(function (elem) {
     return elem.getAttribute("href");
@@ -47,30 +50,12 @@ let pw = "12345678";
   for(let i=0 ; i<challenges.length; i++){
       let newTab = await browser.newPage();
       await challengeAdd(newTab , challenges[i] , createChallengeLink);
+    //   await tab.waitForTimeout(2000);
   }
 })();
 
 // add a single challenge
 async function challengeAdd(newTab , challenge , createChallengeLink){
-    // {
-    //     "Challenge Name": "Pep_Java_1GettingStarted_1IsPrime",
-    //     "Description": "Question 1",
-    //     "Problem Statement": "Take as input a number n. Determine whether it is prime or not. If it is prime, print 'Prime' otherwise print 'Not Prime.",
-    //     "Input Format": "Integer",
-    //     "Constraints": "n <= 10 ^ 9",
-    //     "Output Format": "String",
-    //     "Tags": "Basics",
-    //     "Testcases": [
-    //       {
-    //         "Input": "7",
-    //         "Output": "Prime"
-    //       },
-    //       {
-    //         "Input": "9",
-    //         "Output": "Not Prime"
-    //       }
-    //     ]
-    //   }
     let challengeName =  challenge["Challenge Name"];
     let description = challenge["Description"];
     let problemStatement = challenge["Problem Statement"];
@@ -93,6 +78,6 @@ async function challengeAdd(newTab , challenge , createChallengeLink){
     await newTab.type('#tags_tag' , tags);
     await newTab.keyboard.press("Enter");
     await newTab.click('.save-challenge.btn.btn-green');
-    await newTab.waitForTimeout(5000);
+    // await newTab.waitForTimeout(20000);
     await newTab.close();
 }
