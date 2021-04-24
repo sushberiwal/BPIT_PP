@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Units</title>
+</head>
+<style>
+    .one{
+        height: 200px;
+        width: 200px;
+        background-color: blueviolet;
+    }
+    .two{
+        height: 20vh;
+        width: 50vw;
+        background:aqua;
+    }
+    .static{
+        height: 200px;
+        width: 200px;
+    }
+</style>
+<body>
+    <h2>% , vh , vw , px , rem , em</h2>
+    <hr />
+    <p>px stands for pixel these are not related to page size. No matter what is the page size div will remain in 200*200 size</p>
+
+    <div class="one">
+    </div>
+
+    <hr />
+    <p>vh and vw. Here v stands for viewport and h for height and w for width. So 10vh means 10 % of viewport height and similarlhy 10vw means 10% of viewport width</p>
+    <div class="two"></div>
+    
+    <hr />
+    <p>% is used when you want to give a height or width on basis of parents height or width</p>
+    <div class="static">
+        <div class="nested"></div>
+    </div>
+</body>
+</html>
