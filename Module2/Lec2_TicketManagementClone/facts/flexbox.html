@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .flexbox {
+        background: lightgreen;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    flex-wrap: wrap;
+    grid-gap: 22px;
+    /* /* flex-direction: column; */
+    }
+
+    .flexbox div {
+    height: 100px;
+    width: 100px;
+    }
+
+    .box-one {
+        background: blue;
+    }
+
+    .box-two {
+        /* min-height: 500px !important; */
+    background: red;
+    }
+
+    .box-three {
+        background: yellow;
+    }
+
+    .box-four {
+        background: violet;
+    /* min-height: 300px !important; */
+    }
+
+    .box-five {
+        background: paleturquoise;
+    }
+</style>
+
+<body>
+    <div class="flexbox">
+        <div class="box-one"></div>
+        <div class="box-two"></div>
+        <div class="box-three"></div>
+        <div class="box-four"></div>
+        <div class="box-five"></div>
+        <div class="box-three"></div>
+        <div class="box-four"></div>
+        <div class="box-five"></div>
+        <div class="box-three"></div>
+        <div class="box-four"></div>
+        <div class="box-five"></div>
+        <div class="box-three"></div>
+        <div class="box-four"></div>
+        <div class="box-five"></div>
+    </div>
+</body>
+
+</html>
