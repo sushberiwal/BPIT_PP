@@ -29,7 +29,7 @@
     opacity: 0.5;
 }
 
-.filter:hover{
+.filter:hover {
     opacity: 1;
 }
 
@@ -74,39 +74,63 @@
     align-items: center;
 }
 
-
-.open-modal:hover , .close-modal:hover{
+.open-modal:hover , .close-modal:hover {
     background: #232b2b;
 }
-
 
 .tickets-content {
     min-height: 85vh;
     background: #dcdde1;
+    position: relative;
 }
 
-.fas{
-font-size: 1.5rem;
-color: white;
+.fas {
+    font-size: 1.5rem;
+    color: white;
 }
 
-.active-filter{
-    opacity:1;
-    border:1px solid white;
+.active-filter {
+    opacity: 1;
+    border: 1px solid white;
 }
 
-
-.modal{
-
+.modal {
+    height: 40vh;
+    width: 70vh;
+    /* background: violet; */
+    position: absolute;
+    top: 100px;
+    left: calc(50% - 35vh);
+    /* border: 2px solid; */
+    display: flex;
 }
 
-.modal-text{
-
+.modal-text {
+    background: white;
+    height: 100%;
+    outline: none;
+    width: 70%;
+    padding: 10px;
+    font-size: 1.5rem;
+    overflow: auto;
 }
-.modal-filter-options{
 
+.modal-filter-options {
+    height: 100%;
+    width: 30%;
+    background: #0e1111;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.modal-filter{
-    
+.modal-filter {
+    height: 15%;
+    width: 60%;
+    opacity: 0.5;
+}
+
+.modal-filter:hover {
+    opacity: 1;
 }
