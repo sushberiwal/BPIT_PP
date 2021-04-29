@@ -82,6 +82,11 @@
     min-height: 85vh;
     background: #dcdde1;
     position: relative;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 20px;
+    justify-content: space-evenly;
 }
 
 .fas {
@@ -133,4 +138,30 @@
 
 .modal-filter:hover {
     opacity: 1;
+}
+
+.ticket {
+    height: 20vh;
+    width: 40vh;
+    /* background: blueviolet; */
+}
+
+.ticket-filter {
+    height: 15%;
+}
+
+.ticket-content {
+    height: 85%;
+    background: white;
+    padding: 10px;
+}
+
+.ticket-id {
+    font-weight: bold;
+}
+
+.ticket-text {
+    text-align: center;
+    margin-top: 10px;
+    word-break: break-all;
 }

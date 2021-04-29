@@ -36,16 +36,6 @@ for (let i = 0; i < allFilters.length; i++) {
 
 modalOpen.addEventListener("click", function (e) {
   // append html of modal in ticketsContent
-
-  // <div class="modal">
-  //         <div class="modal-text" spellcheck="false" contenteditable="true"></div>
-  //         <div class="modal-filter-options">
-  //             <div class="modal-filter blue"></div>
-  //             <div class="modal-filter yellow"></div>
-  //             <div class="modal-filter green"></div>
-  //             <div class="modal-filter black"></div>
-  //         </div>
-  //     </div>
   if (document.querySelector(".modal")) {
     return;
   }
@@ -62,13 +52,17 @@ modalOpen.addEventListener("click", function (e) {
                 <div class="modal-filter black active-filter"></div>
             </div>`;
   modalDiv.querySelector(".modal-text").addEventListener("keypress" , function(e){
+    // if key is enter then append the ticket and close the modal
+    if(e.key == "Enter" && e.target.getAttribute("data-typed") == "true" ){
+      appendTicket(e.target.textContent);
+      return;
+    }
     if(e.target.getAttribute("data-typed") == "true"){
         return;
-    }  
+    } 
     e.target.textContent = "";
     e.target.setAttribute("data-typed" , "true");
   })
-
   modalDiv.querySelector(".modal-filter-options").addEventListener("click" , function(e){
     // console.log(e);
       let modalFilter = e.target;
@@ -85,8 +79,45 @@ modalOpen.addEventListener("click", function (e) {
   ticketsContent.append(modalDiv);
 });
 
-modalClose.addEventListener("click", function (e) {
+modalClose.addEventListener("click", closeModal);
+
+function closeModal(e){
   if (document.querySelector(".modal")) {
     document.querySelector(".modal").remove();
   }
-});
+}
+
+function appendTicket(ticketText){
+  
+
+  if(!ticketText.length){
+    return;
+  }
+  // create a ticket dynamically
+  let ticketDiv = document.createElement("div");
+  ticketDiv.classList.add("ticket");
+
+  ticketDiv.innerHTML = `<div class="ticket-filter ${activeModalFilter}"></div>
+  <div class="ticket-content">
+      <div class="ticket-id">#exampleid</div>
+      <div class="ticket-text">${ticketText}</div>
+  </div>`;
+
+  // to toggle filter of ticket !
+  ticketDiv.querySelector(".ticket-filter").addEventListener("click" , function(e){
+    let ticketFilters = [ "blue" , "yellow" , "green" , "black" ];
+    let currentFilter = e.target.classList[1];
+    let idx = ticketFilters.indexOf(currentFilter);
+    idx++;
+    idx = idx%4;
+
+    e.target.classList.remove(currentFilter);
+    e.target.classList.add(ticketFilters[idx]);
+  })
+
+  // append that ticket Div in ticketContent
+  ticketsContent.append(ticketDiv);
+
+  // close Modal when ticket appended !!
+  closeModal();
+}
