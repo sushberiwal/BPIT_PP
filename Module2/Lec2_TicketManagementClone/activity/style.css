@@ -90,7 +90,7 @@
 }
 
 .active-filter {
-    opacity: 1;
+    opacity: 1 !important;
     border: 1px solid white;
 }
 
