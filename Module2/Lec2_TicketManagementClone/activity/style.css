@@ -7,14 +7,14 @@
 
 .header {
     height: 15vh;
-    background: #192a56;
+    background: #0e1111;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
 .ticket-filters {
-    background: #273c75;
+    background: #353839;
     height: 40%;
     width: 30%;
     display: flex;
@@ -34,25 +34,25 @@
 }
 
 .blue {
-    background: #00a8ff;
+    background: #3498db;
 }
 
 .yellow {
-    background: #fbc531;
+    background: #f1c40f;
 }
 
 .green {
-    background: #4cd137;
+    background: #2ecc71;
 }
 
 .black {
-    background: #2f3640;
+    background: #2c3e50;
 }
 
 .ticket-actions {
     height: 40%;
     width: 15%;
-    background: #273c75;
+    background: #353839 ;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,7 +76,7 @@
 
 
 .open-modal:hover , .close-modal:hover{
-    background: #192a56;
+    background: #232b2b;
 }
 
 
@@ -93,4 +93,20 @@ color: white;
 .active-filter{
     opacity:1;
     border:1px solid white;
+}
+
+
+.modal{
+
+}
+
+.modal-text{
+
+}
+.modal-filter-options{
+
+}
+
+.modal-filter{
+    
 }
