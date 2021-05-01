@@ -14,7 +14,7 @@ let activeModalFilter = "black";
 function initTickets() {
   let allTickets = JSON.parse(localStorage.getItem("allTickets"));
   if (!allTickets) {
-    localStorage.setItem("allTickets" , JSON.stringify([]));  
+    localStorage.setItem("allTickets", JSON.stringify([]));
     return;
   }
   // if tickets are present
@@ -34,10 +34,29 @@ function appendTicketToUi(ticketObject) {
 
   ticketDiv.innerHTML = `<div id=${ticketId} class="ticket-filter ${ticketFilter}"></div>
   <div class="ticket-content">
+      <div class="ticket-info">
       <div class="ticket-id">#${ticketId}</div>
+      <div class="ticket-delete"><i ticketId = ${ticketId} class="fas fa-trash ${ticketFilter}"></i></div>
+      </div>
       <div class="ticket-text">${ticketText}</div>
   </div>`;
 
+  // ticket delete
+  ticketDiv.querySelector(".ticket-delete").addEventListener("click" , function(e){
+    let ticketId = e.target.getAttribute("ticketId");
+    // console.log(ticketId);
+    // UI se remove
+    ticketDiv.remove();
+
+    let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+    let filteredTickets = allTickets.filter(function(ticketObj){
+      return ticketObj.ticketId != ticketId;
+    })
+
+    localStorage.setItem("allTickets" , JSON.stringify(filteredTickets));
+  })
+
+// ticket filter change
   ticketDiv
     .querySelector(".ticket-filter")
     .addEventListener("click", function (e) {
@@ -49,6 +68,16 @@ function appendTicketToUi(ticketObject) {
 
       e.target.classList.remove(currentFilter);
       e.target.classList.add(ticketFilters[idx]);
+
+      let ticketId = e.target.id;
+      let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+      for (let i = 0; i < allTickets.length; i++) {
+        if (allTickets[i].ticketId == ticketId) {
+          allTickets[i].ticketFilter = ticketFilters[idx];
+          break;
+        }
+      }
+      localStorage.setItem("allTickets", JSON.stringify(allTickets));
     });
 
   // append that ticket Div in ticketContent

@@ -4,7 +4,9 @@ for (let i = 0; i < allFilters.length; i++) {
     // if clicked on already active filter element then return !!
     if (e.target.classList.contains("active-filter")) {
       e.target.classList.remove("active-filter");
-      ticketsContent.style.background = "#dcdde1";
+      // ticketsContent.style.background = "#dcdde1";
+      ticketsContent.innerHTML = "";
+      initTickets();
       return;
     }
 
@@ -17,7 +19,10 @@ for (let i = 0; i < allFilters.length; i++) {
     e.target.classList.add("active-filter");
     // it will change tickets content ka background !!
 
-    ticketsContent.style.background = filterCodes[filterSelected];
+    // ticketsContent.style.background = filterCodes[filterSelected];
+
+    // ticket sort
+    sortTickets(filterSelected);
   });
 }
 
@@ -38,43 +43,51 @@ modalOpen.addEventListener("click", function (e) {
                 <div class="modal-filter green"></div>
                 <div class="modal-filter black active-filter"></div>
             </div>`;
-  modalDiv.querySelector(".modal-text").addEventListener("keypress" , function(e){
-    // if key is enter then append the ticket and close the modal
-    if(e.key == "Enter" && e.target.getAttribute("data-typed") == "true" ){
-      appendTicket(e.target.textContent);
-      return;
-    }
-    if(e.target.getAttribute("data-typed") == "true"){
+  modalDiv
+    .querySelector(".modal-text")
+    .addEventListener("keypress", function (e) {
+      // if key is enter then append the ticket and close the modal
+      if (e.key == "Enter" && e.target.getAttribute("data-typed") == "true") {
+        appendTicket(e.target.textContent);
         return;
-    } 
-    e.target.textContent = "";
-    e.target.setAttribute("data-typed" , "true");
-  })
-  modalDiv.querySelector(".modal-filter-options").addEventListener("click" , function(e){
-    // console.log(e);
+      }
+      if (e.target.getAttribute("data-typed") == "true") {
+        return;
+      }
+      e.target.textContent = "";
+      e.target.setAttribute("data-typed", "true");
+    });
+  modalDiv
+    .querySelector(".modal-filter-options")
+    .addEventListener("click", function (e) {
+      // console.log(e);
       let modalFilter = e.target;
-      if(modalFilter.classList.contains("active-filter") || modalFilter.classList.contains("modal-filter-options")){
-          return;
+      if (
+        modalFilter.classList.contains("active-filter") ||
+        modalFilter.classList.contains("modal-filter-options")
+      ) {
+        return;
       }
 
-      document.querySelector(".modal-filter.active-filter").classList.remove("active-filter");
+      document
+        .querySelector(".modal-filter.active-filter")
+        .classList.remove("active-filter");
       modalFilter.classList.add("active-filter");
-      
+
       activeModalFilter = modalFilter.classList[1];
-  })
+    });
 
   ticketsContent.append(modalDiv);
 });
 modalClose.addEventListener("click", closeModal);
 
-function closeModal(e){
+function closeModal(e) {
   if (document.querySelector(".modal")) {
     document.querySelector(".modal").remove();
   }
 }
-
-function appendTicket(ticketText){
-  if(!ticketText.length){
+function appendTicket(ticketText) {
+  if (!ticketText.length) {
     return;
   }
   // create a ticket dynamically
@@ -84,38 +97,82 @@ function appendTicket(ticketText){
   let ticketId = uid();
   ticketDiv.innerHTML = `<div id=${ticketId} class="ticket-filter ${activeModalFilter}"></div>
   <div class="ticket-content">
-      <div class="ticket-id">#${ticketId}</div>
+  <div class="ticket-info">
+  <div class="ticket-id">#${ticketId}</div>
+  <div class="ticket-delete"><i ticketId = ${ticketId} class="fas fa-trash ${activeModalFilter}"></i></div>
+  </div>
       <div class="ticket-text">${ticketText}</div>
   </div>`;
 
-  // to toggle filter of ticket !
-  ticketDiv.querySelector(".ticket-filter").addEventListener("click" , function(e){
-    let ticketFilters = [ "blue" , "yellow" , "green" , "black" ];
-    let currentFilter = e.target.classList[1];
-    let idx = ticketFilters.indexOf(currentFilter);
-    idx++;
-    idx = idx%4;
+  // ticket delete
+  ticketDiv.querySelector(".ticket-delete").addEventListener("click" , function(e){
+    let ticketId = e.target.getAttribute("ticketId");
+    // console.log(ticketId);
+    // UI se remove
+    ticketDiv.remove();
 
-    e.target.classList.remove(currentFilter);
-    e.target.classList.add(ticketFilters[idx]);
+    let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+    let filteredTickets = allTickets.filter(function(ticketObj){
+      return ticketObj.ticketId != ticketId;
+    })
+
+    localStorage.setItem("allTickets" , JSON.stringify(filteredTickets));
   })
+
+  // to toggle filter of ticket !
+  ticketDiv
+    .querySelector(".ticket-filter")
+    .addEventListener("click", function (e) {
+      let ticketFilters = ["blue", "yellow", "green", "black"];
+      let currentFilter = e.target.classList[1];
+      let idx = ticketFilters.indexOf(currentFilter);
+      idx++;
+      idx = idx % 4;
+
+      e.target.classList.remove(currentFilter);
+      e.target.classList.add(ticketFilters[idx]);
+
+      let ticketId = e.target.id;
+      let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+      for (let i = 0; i < allTickets.length; i++) {
+        if (allTickets[i].ticketId == ticketId) {
+          allTickets[i].ticketFilter = ticketFilters[idx];
+          break;
+        }
+      }
+      localStorage.setItem("allTickets", JSON.stringify(allTickets));
+    });
 
   // append that ticket Div in ticketContent
   ticketsContent.append(ticketDiv);
 
-    // close Modal when ticket appended !!
-    closeModal();
-    
-    // add ticketObject to allTickets
-    let ticketObject = {
-      ticketId:ticketId,
-      ticketText:ticketText,
-      ticketFilter:activeModalFilter
-    }
-    let allTickets = JSON.parse(localStorage.getItem("allTickets"));
-    allTickets.push(ticketObject);
-    localStorage.setItem("allTickets" , JSON.stringify(allTickets));
-    
-    //reset active modal filter
-    activeModalFilter = "black";
+  // close Modal when ticket appended !!
+  closeModal();
+
+  // add ticketObject to allTickets
+  let ticketObject = {
+    ticketId: ticketId,
+    ticketText: ticketText,
+    ticketFilter: activeModalFilter,
+  };
+  let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+  allTickets.push(ticketObject);
+  localStorage.setItem("allTickets", JSON.stringify(allTickets));
+
+  //reset active modal filter
+  activeModalFilter = "black";
+}
+
+function sortTickets(filterSelected) {
+  let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+  let filteredTickets = allTickets.filter(function (ticketObject) {
+    return ticketObject.ticketFilter == filterSelected;
+  });
+
+  // empty tickets Content !!
+  ticketsContent.innerHTML = "";
+
+  for (let i = 0; i < filteredTickets.length; i++) {
+    appendTicketToUi(filteredTickets[i]);
+  }
 }
