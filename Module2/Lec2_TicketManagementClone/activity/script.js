@@ -1,16 +1,3 @@
-let filterCodes = {
-  blue: "#00a8ff",
-  yellow: "#fbc531",
-  green: "#4cd137",
-  black: "#2f3640",
-};
-
-let allFilters = document.querySelectorAll(".filter");
-let ticketsContent = document.querySelector(".tickets-content");
-let modalOpen = document.querySelector(".open-modal");
-let modalClose = document.querySelector(".close-modal");
-let activeModalFilter = "black";
-
 for (let i = 0; i < allFilters.length; i++) {
   allFilters[i].addEventListener("click", function (e) {
     let filterSelected = e.target.classList[1];
@@ -78,7 +65,6 @@ modalOpen.addEventListener("click", function (e) {
 
   ticketsContent.append(modalDiv);
 });
-
 modalClose.addEventListener("click", closeModal);
 
 function closeModal(e){
@@ -88,8 +74,6 @@ function closeModal(e){
 }
 
 function appendTicket(ticketText){
-  
-
   if(!ticketText.length){
     return;
   }
@@ -97,9 +81,10 @@ function appendTicket(ticketText){
   let ticketDiv = document.createElement("div");
   ticketDiv.classList.add("ticket");
 
-  ticketDiv.innerHTML = `<div class="ticket-filter ${activeModalFilter}"></div>
+  let ticketId = uid();
+  ticketDiv.innerHTML = `<div id=${ticketId} class="ticket-filter ${activeModalFilter}"></div>
   <div class="ticket-content">
-      <div class="ticket-id">#exampleid</div>
+      <div class="ticket-id">#${ticketId}</div>
       <div class="ticket-text">${ticketText}</div>
   </div>`;
 
@@ -118,6 +103,19 @@ function appendTicket(ticketText){
   // append that ticket Div in ticketContent
   ticketsContent.append(ticketDiv);
 
-  // close Modal when ticket appended !!
-  closeModal();
+    // close Modal when ticket appended !!
+    closeModal();
+    
+    // add ticketObject to allTickets
+    let ticketObject = {
+      ticketId:ticketId,
+      ticketText:ticketText,
+      ticketFilter:activeModalFilter
+    }
+    let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+    allTickets.push(ticketObject);
+    localStorage.setItem("allTickets" , JSON.stringify(allTickets));
+    
+    //reset active modal filter
+    activeModalFilter = "black";
 }

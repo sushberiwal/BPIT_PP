@@ -101,11 +101,11 @@
 
 .modal {
     height: 40vh;
-    width: 70vh;
+    width: 40vw;
     /* background: violet; */
     position: absolute;
     top: 100px;
-    left: calc(50% - 35vh);
+    left: calc(50% - 20vw);
     /* border: 2px solid; */
     display: flex;
 }
