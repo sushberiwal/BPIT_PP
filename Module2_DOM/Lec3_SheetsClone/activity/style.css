@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.menu {
+    background: aqua;
+    height: 25px;
+}
+
+.menu-options {
+    background: aquamarine;
+    height: 35px;
+}
+
+.calculation {
+    background: beige;
+    height: 25px;
+}
+
+.cells-content {
+    /* background: mediumpurple; */
+    height: calc( 100vh - 110px );
+    overflow: auto;
+}
+
+.sheets {
+    background: cornflowerblue;
+    height: 25px;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    /* border: 1px solid lightgray; */
+    min-height: 20px;
+    min-width: 70px;
+    outline: none;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
