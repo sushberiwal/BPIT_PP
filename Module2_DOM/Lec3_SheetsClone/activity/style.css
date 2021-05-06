@@ -15,6 +15,7 @@
 }
 
 .calculation {
+    display: flex;
     background: beige;
     height: 25px;
 }
@@ -90,4 +91,16 @@
     border-bottom: 1px solid lightgray;
     border-right: 1px solid lightgray;
     height: 20px;
+}
+
+#address {
+    width: 50px;
+    text-align: center;
+}
+
+#formula {
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 5px;
 }
