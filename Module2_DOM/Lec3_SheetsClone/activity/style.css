@@ -23,6 +23,8 @@
     /* background: mediumpurple; */
     height: calc( 100vh - 110px );
     overflow: auto;
+    font-size: 0.8rem;
+    position: relative;
 }
 
 .sheets {
@@ -34,6 +36,12 @@
     display: flex;
 }
 
+.cells {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
 .cell {
     /* border: 1px solid lightgray; */
     min-height: 20px;
@@ -41,4 +49,45 @@
     outline: none;
     border-bottom: 1px solid lightgray;
     border-right: 1px solid lightgray;
+}
+
+.top-left-cell {
+    height: 20px;
+    width: 20px;
+    background: lightgray;
+    position: absolute;
+    z-index: 3;
+}
+
+.top-row {
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    z-index: 2;
+    background: white;
+}
+
+.top-row-cell {
+    min-height: 20px;
+    min-width: 70px;
+    text-align: center;
+    border-right: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.left-col {
+    width: 20px;
+    position: absolute;
+    top: 20px;
+    z-index: 2;
+    background: white;
+}
+
+.left-col-cell {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    height: 20px;
 }
