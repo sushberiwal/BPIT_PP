@@ -40,9 +40,15 @@ for(let i=0 ; i<allCells.length  ; i++){
         let value = currentElement.textContent;
         let cellObject = db[rowId][colId]; 
         if(value != cellObject.value){
+            
+            if(cellObject.formula){
+                deleteFormula(cellObject);
+            }
+
             // inside if when value is not falsy and also value is not same as already saved value in db
             cellObject.value = value;
-            console.log(db);
+            // console.log(db);
+            updateChildrens(cellObject);
         }
     })
 }
@@ -52,13 +58,22 @@ for(let i=0 ; i<allCells.length  ; i++){
 formulaInput.addEventListener("blur" , function(e){
     let formula = formulaInput.value;
     if(formula && lastSelectedCell){
-        let solvedValue = solveFormula(formula);
-        // set UI
-        lastSelectedCell.textContent  = solvedValue;
-        // set DB
         let cellObject = db[rowId][colId];
-        cellObject.value = solvedValue;
-        cellObject.formula = formula;
+        
+        if(cellObject.formula != formula){    
+            if(cellObject.formula){
+                deleteFormula(cellObject);
+            }
+
+            let solvedValue = solveFormula(formula , cellObject);
+            // set UI
+            lastSelectedCell.textContent  = solvedValue;
+            // set DB
+            cellObject.value = solvedValue;
+            cellObject.formula = formula;
+            // console.log(db);
+            updateChildrens(cellObject);
+        }
     }
 })
 
