@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
+    font-family: 'Lato', sans-serif;
 }
 
 .menu {
@@ -24,13 +25,16 @@
     /* background: mediumpurple; */
     height: calc( 100vh - 110px );
     overflow: auto;
-    font-size: 0.8rem;
+    font-size: 12px;
     position: relative;
 }
 
 .sheets {
-    background: cornflowerblue;
+    /* background: cornflowerblue; */
     height: 25px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
 }
 
 .row {
@@ -103,4 +107,37 @@
     border: none;
     width: 100%;
     padding: 5px;
+}
+
+.add-sheet {
+    width: 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: lightgreen;
+    cursor: pointer;
+    border-right: 1px solid lightgray;
+}
+
+.add-sheet .fas {
+}
+
+.sheets-list {
+    display: flex;
+    height: 100%;
+}
+
+.sheet {
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid gray;
+    background: lightgrey;
+    cursor: pointer;
+}
+
+.active-sheet {
+    background: white;
 }

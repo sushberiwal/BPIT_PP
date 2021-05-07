@@ -13,7 +13,6 @@ let cellsContent = document.querySelector(".cells-content");
     }
     cellsContentHtml += `</div>`
     
-    
     // left col
     cellsContentHtml += `<div class="left-col">`
     for(let i=0 ; i<100 ; i++){
@@ -22,8 +21,6 @@ let cellsContent = document.querySelector(".cells-content");
         cellsContentHtml += `<div class="left-col-cell">${i+1}</div>`
     }
     cellsContentHtml += `</div>`
-    
-    
     
     // cells
     cellsContentHtml += `<div class="cells">`
@@ -38,10 +35,12 @@ let cellsContent = document.querySelector(".cells-content");
     cellsContent.innerHTML = cellsContentHtml;
 })();
 
+
+let sheetsDB = [];
 let db;
 
 function initDB(){
-    db = [];
+    let newDB = [];
     for(let i=0 ; i<100 ; i++){
         let row = [];
         for(let j=0 ; j<26 ; j++){
@@ -55,9 +54,11 @@ function initDB(){
             }
             row.push(cellObject);
         }
-        db.push(row);
+        newDB.push(row);
     }
-    console.log(db);
+    db = newDB;
+    sheetsDB.push(newDB);
+    console.log(sheetsDB);
 };
 initDB();
 
