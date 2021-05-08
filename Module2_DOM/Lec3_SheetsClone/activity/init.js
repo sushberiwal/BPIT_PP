@@ -18,7 +18,7 @@ let cellsContent = document.querySelector(".cells-content");
     for(let i=0 ; i<100 ; i++){
         // i=0 => A
         // 65+i
-        cellsContentHtml += `<div class="left-col-cell">${i+1}</div>`
+        cellsContentHtml += `<div class="left-col-cell" cell-id = "${i}" >${i+1}</div>`
     }
     cellsContentHtml += `</div>`
     
@@ -50,7 +50,8 @@ function initDB(){
                 value:"",
                 formula:"",
                 childrens:[] ,
-                parents:[]
+                parents:[] ,
+                fontStyle : { bold:false , italic:false , underline:false }
             }
             row.push(cellObject);
         }

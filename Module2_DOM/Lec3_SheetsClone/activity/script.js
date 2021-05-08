@@ -30,6 +30,8 @@ cells.addEventListener("click" , function(e){
     // console.log(address);
     addressInput.value = address;
     formulaInput.value = cellObject.formula;
+
+    setMenu(cellObject); 
 })
 
 
@@ -50,6 +52,13 @@ for(let i=0 ; i<allCells.length  ; i++){
             // console.log(db);
             updateChildrens(cellObject);
         }
+    })
+
+    allCells[i].addEventListener("keyup" , function(e){
+        let { height } = e.target.getBoundingClientRect();
+        let rowId = e.target.getAttribute("rowid");
+        let leftColCell = document.querySelector(`div[cell-id="${rowId}"]`);
+        leftColCell.style.height = height+"px";
     })
 }
 
