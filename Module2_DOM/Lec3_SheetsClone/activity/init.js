@@ -51,7 +51,8 @@ function initDB(){
                 formula:"",
                 childrens:[] ,
                 parents:[] ,
-                fontStyle : { bold:false , italic:false , underline:false }
+                fontStyle : { bold:false , italic:false , underline:false } ,
+                textAlign : "left"
             }
             row.push(cellObject);
         }

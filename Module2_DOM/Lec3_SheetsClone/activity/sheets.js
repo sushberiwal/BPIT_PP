@@ -19,7 +19,8 @@ function handleAddSheet(e){
 
     // init DB
     initDB();
-
+    // init Menu
+    initMenu();
     // initUI
     initUI();
 }
@@ -42,6 +43,7 @@ function handleSheetSwitch(e){
 function initUI(){
     for(let i=0 ; i<allCells.length ; i++){
         allCells[i].textContent = "";
+        allCells[i].style="";
     }
 }
 
@@ -49,6 +51,11 @@ function setUI(){
     for(let i=0 ; i<allCells.length ; i++){
         let rowId = allCells[i].getAttribute("rowid");
         let colId = allCells[i].getAttribute("colid"); 
-        allCells[i].textContent = db[rowId][colId].value;
+        let cellObject = db[rowId][colId];
+        allCells[i].textContent = cellObject.value;
+        allCells[i].style.fontWeight = cellObject.fontStyle.bold ? "bold" : "normal";
+        allCells[i].style.fontStyle = cellObject.fontStyle.italic ? "italic":"normal"; 
+        allCells[i].style.textDecoration = cellObject.fontStyle.textDecoration ? "underline":"none";
+        allCells[i].style.textAlign = cellObject.textAlign;
     }
 } 

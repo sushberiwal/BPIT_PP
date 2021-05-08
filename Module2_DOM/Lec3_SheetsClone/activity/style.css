@@ -15,6 +15,7 @@
     display: flex;
     border-bottom: 1px solid lightgray;
     align-items: center;
+    /* font-size: 16px; */
 }
 
 .calculation {
@@ -178,6 +179,27 @@
     border-radius: 5px;
 }
 
-.active-menu{
+.font-family {
+    width: 180px !important;
+}
+
+#font-family {
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 13px;
+    background: #ECEDEC;
+}
+
+#font-size {
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 13px;
+    background: #ECEDEC;
+}
+
+.active-menu {
     background: lightgray;
 }
